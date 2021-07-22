@@ -1,37 +1,50 @@
 package scs;
 
 public class Merge {
-	public static void merge(int[] nums1, int m, int[] nums2, int n) {
-		 int end1=m-1;
-	        int end2=n-1;
-	        if(end1<0 || end2<0){
-	            if(end1<0){
-	            nums1=nums2;    
-	            }
-	          }
-	        else{ 
-	        for(int k=m+n-1; k>0;k--){
-	      
-	               if(nums1[end1]<nums2[end2]){
-	                   nums1[k]=nums2[end2--];
-	               }
-	            else{
-	               nums1[k]= nums1[end1--];
-	            }
-	        }
-	        }
-	        for(int l=0;l<nums1.length;l++) {
-	        	System.out.print(nums1[l]);
-	        }
-	       
-	    }
-	
-	public static void main(String args[]) {
-		int nums1[] = {0};
-		int m=0;
-		int n=1;
-		int nums2[]= {1};
-		
-		merge(nums1, m, nums2, n);
-	}
+	 // Merge arr1[0..n1-1] and arr2[0..n2-1]
+    // into arr3[0..n1+n2-1]
+    public static void mergeArrays(int[] arr1, int[] arr2, int n1,
+                                int n2, int[] arr3)
+    {
+        int i = 0, j = 0, k = 0;
+     
+        // Traverse both array
+        while (i<n1 && j <n2)
+        {
+            // Check if current element of first
+            // array is smaller than current element
+            // of second array. If yes, store first
+            // array element and increment first array
+            // index. Otherwise do same with second array
+            if (arr1[i] < arr2[j])
+                arr3[k++] = arr1[i++];
+            else
+                arr3[k++] = arr2[j++];
+        }
+     
+        // Store remaining elements of first array
+        while (i < n1)
+            arr3[k++] = arr1[i++];
+     
+        // Store remaining elements of second array
+        while (j < n2)
+            arr3[k++] = arr2[j++];
+    }
+     
+    public static void main (String[] args)
+    {
+        int[] arr1 = {1, 3, 5, 7};
+        int n1 = arr1.length;
+     
+        int[] arr2 = {2, 4, 6, 8};
+        int n2 = arr2.length;
+     
+        int[] arr3 = new int[n1+n2];
+         
+        mergeArrays(arr1, arr2, n1, n2, arr3);
+     
+        System.out.println("Array after merging");
+        for (int i=0; i < n1+n2; i++)
+            System.out.print(arr3[i] + " ");
+    }
 }
